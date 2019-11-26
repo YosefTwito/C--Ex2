@@ -23,6 +23,11 @@ void OpenAccount(double amount)
 	printf("Sorry, the bank is full, can't open new account.");
 	return;
 	}
+	if(amount<0)
+	{
+	printf("Can't withdraw money you dont have.");
+	return;
+	}
 
 	account_number=0;
 	int j=0;
@@ -64,6 +69,11 @@ void Deposit()
         printf("Your deposit amount? \n");
         double DepositAmount;
         scanf("%lf",&DepositAmount);
+	if(DepositAmount<0)
+	{
+	printf("Can't deposit negative value");
+	return;
+	}
 	accounts[(account_number - 901)][1] = (((double)(accounts[(account_number - 901)][1])) + (DepositAmount));
 	printf("Your new balance is: %0.2lf \n",(accounts[(account_number - 901)][1]));
 	return;
@@ -88,6 +98,11 @@ void CashWithdrawal()
 	printf("How much money would you like to withdraw ? \n");
         double WithdrawalAmount;
         scanf("%lf",&WithdrawalAmount);
+	if(WithdrawalAmount<0)
+	{
+	printf("Can't withdraw negative amount.");
+	return;
+	}
 	if (WithdrawalAmount > (accounts[account_number - 901][1]))
 	{
 	printf("Can't withdraw this amount, not enough money in the bank account.\n");

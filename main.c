@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<string.h>
 #include"myBank.h"
 
 
@@ -20,13 +21,13 @@ do
 	"7)To view all of the accounts please press P\n"
 	"8)To close al of the accounts please press E \n \n" );
 
-	scanf(" %c",&t);
-
+	scanf(" %1c",&t);
+	
     switch(t)
     {
     
 	case 'O':
-    
+    	
 	printf("How much money would  you like to deposit to your new account :\n\n  " );
 	double amount;
 	scanf("%lf",&amount);
