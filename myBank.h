@@ -3,17 +3,17 @@
 
 	void OpenTheBank();
 
-	void OpenAccount(double amount);
+	void OpenAccount();
 
-	void CheckBalance(int account_number);
+	void CheckBalance();
 
 	void Deposit();
 
 	void CashWithdrawal();
 
-	void CloseAccount(int account_number);
+	void CloseAccount();
 
-	void AddInterest(double interest);
+	void AddInterest();
 
 	void AllAccounts();
 

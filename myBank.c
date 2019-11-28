@@ -16,8 +16,12 @@ void OpenTheBank(){
     return;
 }
 	  
-void OpenAccount(double amount)
+void OpenAccount()
 {	
+	printf("How much money would  you like to deposit to your new account :\n" );
+	double amount;
+	if (scanf("%lf",&amount)==1)
+	{
 	if (_openAccounts>=50)
 	{
 	printf("Sorry, the bank is full, can't open new account.");
@@ -44,17 +48,32 @@ void OpenAccount(double amount)
 	}
 	accounts[(account_number-901)][1] = amount;	
 	printf("Congratulations, you have a new bank account,\nYour new account number is: %d\nYour balance is: %0.2lf\n  ", account_number, amount);
+	}
+	else
+	{
+	printf("Wrong type, Insert new transaction type.");
+	return;
+	}
 }
 
 
-void CheckBalance(int account_number)
-{
+void CheckBalance()
+{	
+        printf("Please insert your account number:\n");
+	if (scanf("%d",&account_number)==1)
+	{
+	if (account_number<901 || account_number>950)
+	{
+	printf("There is no such account");
+	return;
+	}
 	if(accounts[(account_number-901)][0] != CLOSED_ACCOUNT)
 	{
  	printf("Your account balance is: %0.2lf \n",accounts[(account_number - 901)][1]);
 	}
 	else {
 	printf("This account does not exist\n");
+	}
 	}
 	return;	
 }
@@ -64,6 +83,11 @@ void Deposit()
 {   
 	printf("Please insert your account number: \n" );
 	scanf("%d",&account_number);
+	if (account_number<901 || account_number>950)
+	{
+	printf("There is no such account");
+	return;
+	}
 	if(accounts[(account_number-901)][0] == ((double) OPENED_ACCOUNT))
 	{
         printf("Your deposit amount? \n");
@@ -75,6 +99,7 @@ void Deposit()
 	return;
 	}
 	accounts[(account_number - 901)][1] = (((double)(accounts[(account_number - 901)][1])) + (DepositAmount));
+	(accounts[account_number - 901][1]) = ((int)((accounts[account_number - 901][1])*100))/100.0;
 	printf("Your new balance is: %0.2lf \n",(accounts[(account_number - 901)][1]));
 	return;
 	}
@@ -95,6 +120,11 @@ void CashWithdrawal()
 	printf("This account does not exist\n");
 	return;
 	}
+	if (account_number<901 || account_number>950)
+	{
+	printf("There is no such account");
+	return;
+	}
 	printf("How much money would you like to withdraw ? \n");
         double WithdrawalAmount;
         scanf("%lf",&WithdrawalAmount);
@@ -109,12 +139,20 @@ void CashWithdrawal()
 	return;
 	}
 	accounts[(account_number - 901)][1] = accounts[account_number - 901][1] -  WithdrawalAmount ;
+	(accounts[account_number - 901][1]) = ((int)((accounts[account_number - 901][1])*100))/100.0;
 	printf("Your new balance is: %0.2lf\n", accounts[account_number - 901][1]);
 	return;
 }
 
-void CloseAccount(int account_number)
+void CloseAccount()
 {
+	printf("Please insert the account number you would like to close: \n" );
+	scanf("%d",&account_number);
+	if (account_number<901 || account_number>950)
+	{
+	printf("There is no such account");
+	return;
+	}
 	if (accounts[(account_number - 901)][0] == CLOSED_ACCOUNT)
 	{
 	printf("There is no such account");
@@ -127,12 +165,26 @@ void CloseAccount(int account_number)
 	return;
 }
 
-void AddInterest(double interest)
+void AddInterest()
 {
+	int interest=0;	
+	printf("What percentage of interest you want to add?\n");
+	if(scanf("%d",&interest)==1)
+	{
+	if(interest<0)
+	{
+	printf("Can't add negative percent");
+	return;
+	}
 	for(int i=0;i<50;i++)
 	{
-	(accounts[i][1]) = accounts[i][1] + ((accounts[i][1])*(interest/100));
+	(accounts[i][1]) += ((accounts[i][1])*(interest/100.0));
+	(accounts[i][1]) = ((int)((accounts[i][1])*100))/100.0;
 	}
+	printf("Successfully added '%d' percent interest!", interest);
+	return;	
+	}
+	printf("Something went wrong");
  	return;
 }
 	
@@ -144,7 +196,8 @@ void AllAccounts()
 	printf("There are no open accounts");
 	return;
 	}
-	for(int i=0; i<50; i++) {
+	for(int i=0; i<50; i++) 
+	{
 	double a1=(i + 901);
 	double a2=accounts[i][1];
 	if (accounts[i][0]==OPENED_ACCOUNT)
@@ -164,5 +217,4 @@ void CloseAll()
 	}
 	printf("All accounts are closed\n ");
 	return;
-
 }

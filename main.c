@@ -1,13 +1,9 @@
 #include<stdio.h>
-#include<string.h>
 #include"myBank.h"
-
 
 int main()
 {
 	OpenTheBank();
-        double interest=0.0;
-        int account_number=0;
     	char t;
 do 
 {  
@@ -21,77 +17,48 @@ do
 	"7)To view all of the accounts please press P\n"
 	"8)To close al of the accounts please press E \n \n" );
 
-	scanf(" %1c",&t);
+	if(scanf(" %1c",&t)==1)
+	{
+	switch(t)
+		{
+		case 'O':
+		OpenAccount();
+		break;
+
+	 	case 'B':
+		CheckBalance();
+		break;
 	
-    switch(t)
-    {
-    
-	case 'O':
-    	
-	printf("How much money would  you like to deposit to your new account :\n\n  " );
-	double amount;
-	scanf("%lf",&amount);
-	OpenAccount(amount);
-	break;
-
- 	case 'B':
-    
-        printf("Please insert your account number\n\n"  );
-	scanf("%d",&account_number);
-	CheckBalance(account_number);
-	break;
-
-	case 'D':
-   
-        Deposit();
-	break;
-
-	case 'W':
-   
-	CashWithdrawal();
-	break;
+		case 'D':
+	        Deposit();
+		break;
 	
-	case 'C':
-        
-	printf("Please insert the account number you would like to close: \n" );
-	scanf("%d",&account_number);
-	CloseAccount(account_number);
-        break;
-
-        case 'I':
-
-	printf("What percentage of interest you want to add?\n");
-	interest=0.0;
-	scanf("%lf",&interest);
-	AddInterest(interest);
-	break; 
-       
-	case 'P':
-
-        AllAccounts();
-        break;
-
-	case 'E':
-
-	CloseAll();
-	break;
-
-	default :
-
-	printf("Not legal transaction type, try again \n");
-        break;
-
-    }     
+		case 'W':
+		CashWithdrawal();
+		break;
+		
+		case 'C':
+		CloseAccount();
+	        break;
+	
+	        case 'I':
+		AddInterest();
+		break; 
+	       
+		case 'P':
+	        AllAccounts();
+	        break;
+	
+		case 'E':
+		CloseAll();
+		break;
+	
+		default :
+		printf("Not legal transaction type, try again \n");
+	        break;
+		} 
+	}
 }while(t != 'E');  
 
 return 0;
 }
-
-
-
-
-
-
-
-
-
